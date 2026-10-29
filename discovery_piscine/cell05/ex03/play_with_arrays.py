@@ -8,7 +8,7 @@ for number in original_array:
     if number > 5:
         new_array.append(number + 2)
 
-unique_arrey = list(set(new_array))
+unique_arrey = (set(new_array))
 
 print(original_array)
 print(unique_arrey)
