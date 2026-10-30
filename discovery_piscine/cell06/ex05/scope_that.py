@@ -8,6 +8,6 @@ my_var = 5
 
 print(f"Before calling the method: {my_var}")
 
-add_one(my_var)
+my_var = add_one(my_var)
 
 print(f"After calling the method: {my_var}")
