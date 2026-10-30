@@ -6,5 +6,13 @@
         "location": "42Bangkok",
         "status": "Pending",
         "checker": "-"
+    },
+    {
+        "id": "EQS-2026-002",
+        "name": "iMac 2026",
+        "category": "IT",
+        "location": "42Bangkok",
+        "status": "Pending",
+        "checker": "-"
     }
 ]
