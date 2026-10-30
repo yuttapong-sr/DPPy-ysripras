@@ -1,16 +1,37 @@
-# Annual Asset Audit & Inventory System
+# Annual Asset Audit & Inventory System (Status404)
 
 ## Description
-A command-line Python application designed to manage and audit annual company assets efficiently, featuring automated JSON data persistence (Bonus).
+**Annual Asset Audit & Inventory System** เป็นแอปพลิเคชันสั่งงานผ่านคอมมานด์ไลน์ (CLI Application) ที่พัฒนาขึ้นด้วยภาษา Python โดยมีวัตถุประสงค์เพื่อช่วยสนับสนุนการบริหารจัดการและตรวจสอบสภาพครุภัณฑ์ประจำปีของหน่วยงาน รองรับการบันทึกข้อมูลระยะยาว การประมวลผลสถิติความก้าวหน้า และระบบสำรองข้อมูลอัตโนมัติอย่างไร้รอยต่อ
 
-## Features
-- Register new assets with duplicate ID prevention.
-- View complete asset registry.
-- Audit and update asset statuses (Checked, Missing, Damaged).
-- Search assets and generate audit progress summary reports.
-- Automatically save and load data using JSON files.
+---
+
+## Key Features & Menu Options
+ระบบประกอบด้วยเมนูหลัก 10 ตัวเลือก พร้อมฟังก์ชันการทำงานที่ครอบคลุมทุกมิติของการตรวจนับ:
+
+1. **Register New Asset (ลงทะเบียนครุภัณฑ์ใหม่):** เพิ่มข้อมูลครุภัณฑ์เข้าสู่ระบบ พร้อมระบบป้องกันรหัสซ้ำ (Duplicate ID Prevention)
+2. **View All Assets (ดูรายการครุภัณฑ์ทั้งหมด):** แสดงรายชื่อครุภัณฑ์ทั้งหมดในระบบ พร้อมรายละเอียด ID, ชื่อ, หมวดหมู่, สถานะ, และผู้ตรวจสอบ
+3. **Audit / Update Asset Status (ตรวจนับและอัปเดตสถานะ):** บันทึกผลการตรวจสอบครุภัณฑ์ (Checked, Missing, Damaged) พร้อมบันทึกชื่อผู้ตรวจสอบ
+4. **Update Asset Details (แก้ไขข้อมูลครุภัณฑ์):** แก้ไขข้อมูลทั่วไป (ชื่อ, หมวดหมู่, สถานที่) โดยสามารถเลือกเว้นว่างฟิลด์ที่ไม่ต้องการเปลี่ยนได้
+5. **Delete Asset (ลบรายการครุภัณฑ์):** ลบครุภัณฑ์ออกจากระบบ พร้อมระบบยืนยันความปลอดภัย (Confirmation)
+6. **Search and Audit Summary Report (ค้นหาและสรุปรายงาน):** คำนวณสถิติภาพรวมเปอร์เซ็นต์ความก้าวหน้า (`Audit Progress %`) และค้นหาข้อมูลตามเงื่อนไข (Status / Location)
+7. **Reset Audit Status for New Year (รีเซ็ตสถานะประจำปี):** ล้างค่าสถานะการตรวจนับทั้งหมดให้กลับมาเป็น `Pending` เพื่อเตรียมพร้อมสำหรับรอบปีถัดไป
+8. **Export Data to CSV (ส่งออกข้อมูลเป็น CSV):** ส่งออกรายงานข้อมูลครุภัณฑ์เพื่อนำไปเปิดใช้งานต่อในโปรแกรม Excel (รองรับการแสดงผลภาษาไทยด้วย UTF-8 with BOM)
+9. **Export Data to JSON (สำรองข้อมูล JSON):** ฟังก์ชันสำรองข้อมูลหรือสร้างไฟล์ Backup ตามชื่อที่ผู้ใช้กำหนด
+10. **Exit (ออกจากระบบ):** ปิดโปรแกรมอย่างปลอดภัย
+
+---
+
+## Business Rules & Error Handling
+โปรแกรมมีการควบคุมกฎทางธุรกิจและการดักจับข้อผิดพลาด (Fault-Tolerant) เพื่อป้องกันไม่ให้โปรแกรมเกิด Crash (Traceback):
+* **Duplicate ID Validation:** ป้องกันการลงทะเบียนรหัสครุภัณฑ์ซ้ำกันในระบบ
+* **Existence Check:** ตรวจสอบความมีอยู่จริงของรหัสครุภัณฑ์ก่อนทำการอัปเดตสถานะหรือลบข้อมูล
+* **Input Validation:** ดักจับข้อผิดพลาดกรณีที่ผู้ใช้เลือกเมนูผิดพลาด หรือป้อนข้อมูลว่างเปล่าในช่องที่จำเป็น
+* **JSON Auto-Persistence (Bonus):** โหลดและบันทึกข้อมูลลงไฟล์ `assets_data.json` อัตโนมัติทุกครั้งที่มีการเปลี่ยนแปลง พร้อมฟังก์ชันดักจับ Error กรณีไฟล์หายหรือเสียหาย (ระบบจะคืนค่าเป็น List เปล่าอัตโนมัติโดยไม่พัง)
+
+---
 
 ## How to Run
-1. Ensure Python 3 is installed.
-2. Grant execution permission: `chmod +x main.py`
-3. Run the application: `./main.py`
+1. ตรวจสอบให้แน่ใจว่าติดตั้ง Python 3 บนเครื่องเรียบร้อยแล้ว
+2. กำหนดสิทธิ์ให้ไฟล์สามารถรันได้โดยตรง:
+   ```bash
+   chmod +x main.py
